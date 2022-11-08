@@ -1,14 +1,13 @@
 import 'dart:html';
 
-import 'package:docs/models/user_model.dart';
+//import 'package:docs/models/user_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 final AuthRepositoryprovider =
     //Provider(((ref) => AuthRepository(googlesignIn: GoogleSignIn(), client: null)));
-      Provider(
-        ((ref) => AuthRepository(googlesignIn: GoogleSignIn())));
+    Provider(((ref) => AuthRepository(googlesignIn: GoogleSignIn())));
 
 class AuthRepository {
   // final GoogleSignIn googlesignIn;
@@ -17,10 +16,10 @@ class AuthRepository {
 
   AuthRepository({
     // required this.googlesignIn
-  //   required Client client,
+    //   required Client client,
     required GoogleSignIn googlesignIn,
   }) : pgooglesignIn = googlesignIn;
-           //  _client = client      ;
+  //  _client = client      ;
 
   void signWithGoogle() async {
     try {
