@@ -1,2 +1,5 @@
 {
+      "[dart]": {
+            "editor.fontFamily": "Fira Code Retina"
+      }
 }

@@ -1,4 +1,5 @@
 const express = require("express");
+const { signup } = require("../controllers/userController");
 const User = require("../models/user");
 
 authRouter = express.Router()
@@ -29,5 +30,7 @@ let user = await User.findOne({ email: email });
 
 
 });
+
+//authRouter.post("/api/signup", signup);
 
 module.exports = authRouter;
