@@ -14,6 +14,8 @@ final AuthRepositoryprovider = Provider(
 
 // Provider(((ref) => AuthRepository(googlesignIn: GoogleSignIn())));
 
+final userProvider = StateProvider<UserModel?>((ref) => null);
+
 class AuthRepository {
   // final GoogleSignIn googlesignIn;
   final GoogleSignIn pgooglesignIn;
@@ -28,7 +30,7 @@ class AuthRepository {
 
   Future<ErrorModel> signWithGoogle() async {
     ErrorModel error =
-        ErrorModel(error: "some unexpected occured :)", data: null);
+        ErrorModel(error: "something unexpected occured :)", data: null);
 
     try {
       final user = await pgooglesignIn.signIn();
@@ -44,7 +46,7 @@ class AuthRepository {
         final userAcc = UserModel(
             email: user.email,
             name: user.displayName!,
-            profilePic: user.photoUrl!,
+            profilePic: user.photoUrl,
             uid: '',
             token: '');
 
@@ -52,6 +54,8 @@ class AuthRepository {
             body: userAcc.toJson(),
             headers: {
               'Content-Type': 'application/json; charset=UTF-8',
+              //"Accept": "application/json",
+              "Access-Control_Allow_Origin": "*"
             });
 
         switch (res.statusCode) {
@@ -60,6 +64,7 @@ class AuthRepository {
               uid: jsonDecode(res.body)['user']['_id'],
               token: jsonDecode(res.body)['token'],
             );
+
             error = ErrorModel(error: null, data: newUser);
             // _localStorageRepository.setToken(newUser.token);
             break;
