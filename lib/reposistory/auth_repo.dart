@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:html';
 
+import 'package:docs/models/error_model.dart';
 import 'package:docs/models/user_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,7 +26,10 @@ class AuthRepository {
   })  : pgooglesignIn = googlesignIn,
         _client = client;
 
-  void signWithGoogle() async {
+  Future<ErrorModel> signWithGoogle() async {
+    ErrorModel error =
+        ErrorModel(error: "some unexpected occured :)", data: null);
+
     try {
       final user = await pgooglesignIn.signIn();
       if (user != null) {
@@ -45,7 +48,7 @@ class AuthRepository {
             uid: '',
             token: '');
 
-        var res = await _client.post(Uri.parse('${host}/api/signup'),
+        var res = await _client.post(Uri.parse('$host/api/signup'),
             body: userAcc.toJson(),
             headers: {
               'Content-Type': 'application/json; charset=UTF-8',
@@ -57,15 +60,17 @@ class AuthRepository {
               uid: jsonDecode(res.body)['user']['_id'],
               token: jsonDecode(res.body)['token'],
             );
-          // error = ErrorModel(error: null, data: newUser);
-          // _localStorageRepository.setToken(newUser.token);
-          // break;
+            error = ErrorModel(error: null, data: newUser);
+            // _localStorageRepository.setToken(newUser.token);
+            break;
         }
       }
     } catch (e) {
       if (kDebugMode) {
+        error = ErrorModel(error: e.toString(), data: null);
         print(e);
       }
     }
+    return error;
   }
 }

@@ -39,6 +39,9 @@ class UserModel {
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source));
 
+  //Leona Lewi
+// https://developer.school/tutorials/dart-flutter-what-does-copywith-do#how-to-make-your-own-copywith-function
+//Instead of mutating or copying an object, you can use copyWith() to create a new object with the same properties as the original, but with some of the values changed.
   UserModel copyWith({
     String? email,
     String? name,
