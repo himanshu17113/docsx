@@ -1,7 +1,7 @@
 import 'package:docs/colors.dart';
 import 'package:docs/reposistory/auth_repo.dart';
+import 'package:docs/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -27,8 +27,24 @@ class LoginScreen extends ConsumerWidget {
   //   // }
   // }
 
-  void signInWithGoogle(WidgetRef ref) {
-    ref.read(AuthRepositoryprovider).signWithGoogle();
+  Future<void> signInWithGoogle(WidgetRef ref, BuildContext context) async {
+    final errorModel = await ref.read(AuthRepositoryprovider).signWithGoogle();
+    final sMassanger = ScaffoldMessenger.of(context);
+    final navigator = Navigator.of(context);
+    // final navigator = Routemaster.of(context);
+    if (errorModel.error == null) {
+      ref.read(userProvider.notifier).update((state) => errorModel.data);
+      navigator.push(
+        MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+        ),
+      );
+      // ref.read(userProvider)
+    } else {
+      sMassanger.showSnackBar(
+        SnackBar(content: Text(errorModel.error!)),
+      );
+    }
   }
 
   @override
@@ -36,8 +52,8 @@ class LoginScreen extends ConsumerWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton.icon(
-          //onPressed: () => signInWithGoogle(ref, context),
-          onPressed: () => signInWithGoogle(ref),
+          onPressed: () => signInWithGoogle(ref, context),
+          //  onPressed: () => signInWithGoogle(ref),
           icon: Image.asset(
             'assets/images/g-logo-2.png',
             height: 20,

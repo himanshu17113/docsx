@@ -1,13 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
-
+const cors = require("cors");
 const PORT = process.env.PORT || 7375
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 app.use(authRouter);
+
 
 const DB =  "mongodb+srv://Himanshu:m7037543555@cluster0.odnwatq.mongodb.net/?retryWrites=true&w=majority";
 
