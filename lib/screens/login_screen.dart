@@ -28,7 +28,7 @@ class LoginScreen extends ConsumerWidget {
   // }
 
   Future<void> signInWithGoogle(WidgetRef ref, BuildContext context) async {
-    final errorModel = await ref.read(AuthRepositoryprovider).signWithGoogle();
+    final errorModel = await ref.read(AuthRepositoryprovider).signWithGoole();
     final sMassanger = ScaffoldMessenger.of(context);
     final navigator = Navigator.of(context);
     // final navigator = Routemaster.of(context);

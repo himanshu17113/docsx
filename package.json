@@ -5,6 +5,31 @@
   "dependencies": {
     "cors": "^2.8.5",
     "cros": "^1.0.1",
-    "mongoose": "^6.7.1"
-  }
+    "dotenv": "^16.0.3",
+    "env": "^0.0.2",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.3"
+  },
+  "name": "dox",
+  "description": "A new Flutter project.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/himanshu17113/docsx.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/himanshu17113/docsx/issues"
+  },
+  "homepage": "https://github.com/himanshu17113/docsx#readme"
 }
