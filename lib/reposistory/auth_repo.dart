@@ -71,7 +71,7 @@ class AuthRepository {
             );
 
             error = ErrorModel(error: null, data: newUser);
-            // _localStorageRepository.setToken(newUser.token);
+            _localStorageRepository.setToken(newUser.token);
             break;
         }
       }
