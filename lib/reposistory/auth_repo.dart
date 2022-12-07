@@ -9,10 +9,10 @@ import '../constant.dart';
 import 'local_storage_repository.dart';
 
 //final AuthRepositoryprovider = Provider<AuthRepository>(((ref) => AuthRepository(
-final AuthRepositoryprovider = Provider(((ref) => AuthRepository(
+final AuthRepositoryprovider = Provider((ref) => AuthRepository(
     googlesignIn: GoogleSignIn(),
     client: Client(),
-    localStorageRepository: LocalStorageRepository())));
+    localStorageRepository: LocalStorageRepository()));
 
 // Provider(((ref) => AuthRepository(googlesignIn: GoogleSignIn())));
 
@@ -50,7 +50,7 @@ class AuthRepository {
 
         final userAcc = UserModel(
             email: user.email,
-            name: user.displayName! ?? '',
+            name: user.displayName!,
             profilePic: user.photoUrl ?? '',
             uid: '',
             token: '');
@@ -58,9 +58,10 @@ class AuthRepository {
         var res = await _client.post(Uri.parse('$host/api/signup'),
             body: userAcc.toJson(),
             headers: {
+              //  'Content-Type': 'application/json'
               'Content-Type': 'application/json; charset=UTF-8',
-              "Accept": "application/json",
-              "Access-Control_Allow_Origin": "*"
+              // "Accept": "application/json",
+              // "Access-Control_Allow_Origin": "*"
             });
 
         switch (res.statusCode) {
@@ -91,10 +92,12 @@ class AuthRepository {
     );
     try {
       String? token = await _localStorageRepository.getToken();
-
+      //String? token = jsonEncode(toke);
       if (token != null) {
         var res = await _client.get(Uri.parse('$host/'), headers: {
           'Content-Type': 'application/json; charset=UTF-8',
+          // "Accept": "application/json",
+          // "Access-Control_Allow_Origin": "*",
           'x-auth-token': token,
         });
         switch (res.statusCode) {

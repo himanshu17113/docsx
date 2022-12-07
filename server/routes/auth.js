@@ -35,16 +35,21 @@ authRouter = express.Router()
 authRouter.post("/api/signup", signup);
 
 
-try {
   authRouter.get("/", auth, async (req, res) => {
-        const user = await User.findById(req.user);
+ 
+try {
+         const user = await User.findById(req.user);
         res.json({user: user, token: req.token });
+    } catch (error) {
+
+   res.status(200).json({ 
+    // hjbhjbhjb
+    error: error.message
+   });
+}  
       });
   
-} catch (error) {
 
-   res.status(200).json({ error: error.message });
-}
 
 
 module.exports = authRouter;
