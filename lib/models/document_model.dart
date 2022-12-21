@@ -29,12 +29,13 @@ class DocumentModel {
       title: map['title'] ?? '',
       uid: map['uid'] ?? '',
       content: List.from(map['content']),
-      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
+      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdat']),
       id: map['_id'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory DocumentModel.fromJson(String source) => DocumentModel.fromMap(json.decode(source));
+  factory DocumentModel.fromJson(String source) =>
+      DocumentModel.fromMap(json.decode(source));
 }

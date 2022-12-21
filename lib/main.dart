@@ -1,8 +1,10 @@
 import 'package:docs/models/error_model.dart';
 import 'package:docs/reposistory/auth_repo.dart';
+import 'package:docs/router.dart';
 import 'package:docs/screens/home_screen.dart';
 import 'package:docs/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -36,14 +38,21 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(userProvider);
-
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: user == null ? const LoginScreen() : const HomeScreen(),
-    );
+    return MaterialApp.router(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        routerDelegate: RoutemasterDelegate(routesBuilder: (context) {
+          final user = ref.watch(userProvider);
+          if (user != null && user.token.isNotEmpty) {
+            return loggedInRoute;
+          }
+          return loggedOutRoute;
+        }),
+        routeInformationParser: const RoutemasterParser()
+        //  home: user == null ? const LoginScreen() : const HomeScreen(),
+        );
   }
 }

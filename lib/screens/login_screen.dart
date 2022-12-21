@@ -30,15 +30,14 @@ class LoginScreen extends ConsumerWidget {
   Future<void> signInWithGoogle(WidgetRef ref, BuildContext context) async {
     final errorModel = await ref.read(AuthRepositoryprovider).signWithGoole();
     final sMassanger = ScaffoldMessenger.of(context);
-    final navigator = Navigator.of(context);
-    // final navigator = Routemaster.of(context);
+    final navigator = Routemaster.of(context);
     if (errorModel.error == null) {
       ref.read(userProvider.notifier).update((state) => errorModel.data);
-      navigator.push(
-        MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
-        ),
-      );
+      navigator.replace("/"
+          // MaterialPageRoute(
+          //   //builder: (context) => const HomeScreen(),
+          // ),
+          );
       // ref.read(userProvider)
     } else {
       sMassanger.showSnackBar(

@@ -2,6 +2,7 @@ const express = require("express");
  cors = require("cors");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
+const docRouter = require("./routes/doc")
 require("dotenv").config();
 
 const PORT = process.env.PORT || 7375
@@ -11,7 +12,7 @@ app.use(cors());
 app.use(express.json());
   // ^ it converts req.body into jason
 app.use(authRouter);
-
+app.use(docRouter);
 //connecting our mongo data base to a server
 const DB =  "mongodb+srv://Himanshu:m7037543555@cluster0.odnwatq.mongodb.net/?retryWrites=true&w=majority";
 

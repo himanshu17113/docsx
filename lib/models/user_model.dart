@@ -29,7 +29,7 @@ class UserModel {
       email: map['email'] ?? '',
       name: map['name'] ?? '',
       profilePic: map['profilePic'] ?? '',
-      uid: map['_id'] ?? '',
+      uid: map['_id'] ?? '', //_id getting from mongodb
       token: map['token'] ?? '',
     );
   }

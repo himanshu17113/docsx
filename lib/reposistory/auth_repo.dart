@@ -63,7 +63,6 @@ class AuthRepository {
               // "Accept": "application/json",
               // "Access-Control_Allow_Origin": "*"
             });
-
         switch (res.statusCode) {
           case 200:
             final newUser = userAcc.copyWith(
@@ -121,10 +120,9 @@ class AuthRepository {
     return error;
   }
 
-  // void signOut() async {
-  //   await _googleSignIn.signOut();
-  //   _localStorageRepository.setToken('');
-  // }
-
+  void signcut() async {
+    await pgooglesignIn.signOut();
+    _localStorageRepository.setToken('');
+  }
 }
 //https://twitter.com/i/status/1562294013591371777
